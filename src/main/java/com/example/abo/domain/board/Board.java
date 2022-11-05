@@ -1,4 +1,5 @@
 package com.example.abo.domain.board;
+
 import com.example.abo.domain.BaseTimeEntity;
 import lombok.*;
 import javax.persistence.Entity;
