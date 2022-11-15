@@ -9,12 +9,12 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    String updateMemberLastLoginTime = "update member set last_login_time = NOW() where email = :email";
+    String updateMemberLastLoginTime = "update member set last_login_time = NOW() where knunum = :knunum";
 
     @Transactional
     @Modifying
     @Query(value = updateMemberLastLoginTime, nativeQuery = true)
-    public int updateMemberLastLogin(@Param("email") String email);
-    public Optional<Member> findByEmail(String email);
-    public int countByEmailAndDropYn(String email, String dropYn);
+    public int updateMemberLastLogin(@Param("knunum") String knunum);
+    public Optional<Member> findByKnunum(String knunum);
+    public int countByKnunumAndPhone(String knunum, String phone);
 }

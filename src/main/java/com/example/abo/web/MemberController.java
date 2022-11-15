@@ -40,8 +40,8 @@ public class MemberController {
     }
 
     @PostMapping("/member/count-email")
-    public String countByEmailAndDropYn(Model model, Member.RequestDto requestDto) {
-        model.addAttribute("count", memberService.countByEmailAndDropYn(requestDto.getEmail(), requestDto.getDropYn()));
+    public String countByKnunumAndPhone(Model model, Member.RequestDto requestDto) {
+        model.addAttribute("count", memberService.countByKnunumAndPhone(requestDto.getKnunum(), requestDto.getPhone()));
         return "jsonView";
     }
 }

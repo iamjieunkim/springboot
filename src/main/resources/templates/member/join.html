@@ -21,23 +21,22 @@
                         <form id="frmJoin" action="/member/save" method="post">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">아이디(학번)</label>
-                                <input type="email" class="form-control" name="email" maxlength="100" required>
-                                <p class="alert alert-danger" id="emailChk" style="display:none;"></p>
+                                <input type="text" class="form-control" name="username" maxlength="100" required>
+                                <p class="alert alert-danger" id="knunumChk" style="display:none;"></p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">비밀번호</label>
                                 <input type="password" class="form-control" name="password" minlength="8" maxlength="200" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-bold">성별</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="M" checked>
-                                    <label class="form-check-label" for="flexRadioDefault1">남자</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="W">
-                                    <label class="form-check-label" for="flexRadioDefault2">여자</label>
-                                </div>
+                                <label class="form-label fw-bold">이름</label>
+                                <input type="text" class="form-control" name="username" maxlength="10" required>
+                                <p class="alert alert-danger" id="knunumChk" style="display:none;"></p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">전화번호</label>
+                                <input type="text" class="form-control" name="username" minlength="9" maxlength="15" placeholder="숫자만 입력하세요." required>
+                                <p class="alert alert-danger" id="knunumChk" style="display:none;"></p>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                 <a type="button" class="small" onclick="javascript:location.href='/member/login'">로그인 하기</a>
@@ -53,22 +52,22 @@
 </body>
 <script th:inline="javascript">
     let frm = $("#frmJoin");
-    let emailChk = false;
+    let knunumChk = false;
 
-    $("input[name='email']").on("focusout",function(){
+    $("input[name='knunum']").on("focusout",function(){
         $.ajax({
             url: "/member/count-email",
             method: "post",
             dataType: "json",
-            data: { email: $("input[name='email']").val(), dropYn: "N" },
+            data: { knunum: $("input[name='knunum']").val(), dropYn: "N" },
             success: function(r) {
                 if (r.count > 0) {
-                    emailChk = false;
-                    $("#emailChk").show();
-                    $("#emailChk").text("This email is in use.");
+                    knunumChk = false;
+                    $("#knunumChk").show();
+                    $("#knunumChk").text("This knunum is in use.");
                 } else {
-                    emailChk = true;
-                    $("#emailChk").hide();
+                    knunumChk = true;
+                    $("#knunumChk").hide();
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -81,7 +80,7 @@
         let flag = false;
         let msg = "Are you sure you want to Join?";
 
-        if (!emailChk) return false;
+        if (!knunumChk) return false;
 
         if (confirm(msg)) {
             flag = true;

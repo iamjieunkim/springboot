@@ -18,22 +18,21 @@ public class MemberService implements UserDetailsService {
 
     public Long save(Member.RequestDto requestDto) {
         requestDto.setPassword(passwordEncoder.encode(requestDto.getPassword()));
-        requestDto.setDropYn("N");
         return memberRepository.save(requestDto.toEntity()).getId();
     }
 
-    public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Could not found user" + email));
+    public Member findByKnunum(String knunum) {
+        return memberRepository.findByKnunum(knunum)
+                .orElseThrow(() -> new UsernameNotFoundException("Could not found user" + knunum));
     }
 
-    public int countByEmailAndDropYn(String email, String dropYn) {
-        return memberRepository.countByEmailAndDropYn(email, dropYn);
+    public int countByKnunumAndPhone(String knunum, String phone) {
+        return memberRepository.countByKnunumAndPhone(knunum, phone);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Could not found user" + email));
+    public UserDetails loadUserByUsername(String knunum) throws UsernameNotFoundException {
+        return memberRepository.findByKnunum(knunum)
+                .orElseThrow(() -> new UsernameNotFoundException("Could not found user" + knunum));
     }
 }
